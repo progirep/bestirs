@@ -1,0 +1,14 @@
+nofDimensions=3
+nofTranslationInvariantDimensions=2
+WorkspaceSizeDim0=16
+WorkspaceSizeDim1=16
+SolverMode=GeneralizedBuchi
+NofBadRegions=4
+NofGoals=3
+Goal0=2-10,2-5,*
+Goal1=0-4,9-14,*
+Goal2=6-13,2-7,*
+BadRegion0=0-2,3-8,*
+BadRegion1=11-14,0-2,*
+BadRegion2=1-4,3-6,*
+BadRegion3=3-6,11-14,*

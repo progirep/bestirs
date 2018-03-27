@@ -1,0 +1,10 @@
+nofDimensions=4
+nofTranslationInvariantDimensions=2
+WorkspaceSizeDim0=16
+WorkspaceSizeDim1=16
+SolverMode=GeneralizedBuchi
+NofBadRegions=0
+NofGoals=3
+Goal0=5-14,9-14,*,*
+Goal1=9-11,6-10,*,*
+Goal2=5-14,5-10,*,*
