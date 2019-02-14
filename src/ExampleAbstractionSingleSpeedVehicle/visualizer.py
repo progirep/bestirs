@@ -45,9 +45,9 @@ LENGTH_TRAIL = 300
 STATE_ETA = (0.2,0.2,math.pi/32.0)
 STATE_LB = (-0.5*STATE_ETA[0],-0.5*STATE_ETA[0],-0.000001)
 STATE_UB = ((XSIZE+0.5)*STATE_ETA[0],(YSIZE+0.5)*STATE_ETA[1],2*math.pi+0.00001)
-INPUT_LB = (-1.0,)
-INPUT_UB = (1,)
 INPUT_ETA = (0.2,)
+INPUT_LB = (-1.0-INPUT_ETA[0]/2.0,)
+INPUT_UB = (1.0+INPUT_ETA[0]/2.0,)
 TIME_STEP = 0.7
 def getGradient(x,u):
     xx = [0,0,0]
@@ -129,7 +129,7 @@ class RunnerThread(threading.Thread):
 
             if self.reset:
                 currentState = tuple([random.randint(0,XSIZE-1),random.randint(0,YSIZE-1)]+list(currentState)[2:])
-                CONTINUOUS_STATE = [a*STATE_ETA[i]+STATE_MIN_VALUE[i] for (i,a) in enumerate(currentState)]
+                CONTINUOUS_STATE = [(a+0.5)*STATE_ETA[i]+STATE_MIN_VALUE[i] for (i,a) in enumerate(currentState)]
                 nextStates = []
                 self.reset = False
                 dataQueue.put(None)
@@ -158,7 +158,8 @@ class RunnerThread(threading.Thread):
                 goalLine = runnerProcess.stdout.readline()
                 #print "LAST:"+str(currentState)+"now: "+goalLine
                 #sys.stdout.flush()
-                CONTINUOUS_STATE = [a*STATE_ETA[i]+STATE_MIN_VALUE[i] for (i,a) in enumerate(currentState)]
+                CONTINUOUS_STATE = [(a+0.5)*STATE_ETA[i]+STATE_MIN_VALUE[i] for (i,a) in enumerate(currentState)]
+                dataQueue.put(None)
                 # time.sleep(1)
             assert goalLine[0]=="C"
             actionLine = runnerProcess.stdout.readline()
